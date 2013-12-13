@@ -61,7 +61,8 @@ List.prototype.seed = function () {
 
     // create row
     row = new Emitter();
-    merge(row, change.value);
+    row.value = change.value;
+    row._id = id;
     row._key = change.key;
     row._element = self._create(row);
     self.rows[id] = row;
@@ -87,7 +88,7 @@ List.prototype.seed = function () {
     if (rows.length == 1 || position == rows.length - 1) {
       self.el.appendChild(row._element);
     } else {
-      var before = self.rows[rows[position + 1]._key];
+      var before = self.rows[rows[position + 1]._id];
       self.el.insertBefore(row._element, before._element);
     }
 
